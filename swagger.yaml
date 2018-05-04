@@ -3,7 +3,11 @@
 swagger: '2.0'
 info:
   title: SCRAP API
-  description: SCRAPのチケット情報用のAPIです
+  description: |
+    SCRAPのチケット情報用のAPIです。
+
+    利用の際は必ずREADMEをご覧ください。
+    ※https://github.com/lirlia/scrap-api/blob/gh-pages/README.md
   version: "1.0.0"
 # the domain of the service
 host: www.0553.jp
@@ -22,6 +26,7 @@ paths:
         eventsエンドポイントは、特定の場所や期間に開催されるSCRAPのリアル脱出ゲーム情報を返します。
         ただし返却されるリアル脱出ゲームの情報はスクラップチケットで管理されるものが対象であり、
         それ以外のチケットサイトで扱われるデータについては含まれません。
+
         応答には、各イベントのタイトルや画像URL、チケットの残り枚数や開催店舗やその他の詳細が含まれ、
         適切な表示順序でイベントが一覧表示されます。
       parameters:
@@ -132,69 +137,69 @@ paths:
                 type: object
                 description: イベント情報
                 properties:
-                  shop_id: 
+                  shop_id:
                     type: string
                     description: 店ID
-                  shop_name: 
+                  shop_name:
                     type: string
                     description: 店名
-                  shop_address_url: 
+                  shop_address_url:
                     type: string
                     description: 店URL
-                  content_code: 
+                  content_code:
                     type: string
                     description: コンテンツコード(英字)
-                  content_name: 
+                  content_name:
                     type: string
                     description: コンテンツ名(unicode)
-                  origin_contents_url: 
+                  origin_contents_url:
                     type: string
                     description: コンテンツURL(公式サイト）
-                  content_url: 
+                  content_url:
                     type: string
                     description: コンテンツURL(スクラップチケットサイト）
-                  min_event_start_time: 
+                  min_event_start_time:
                     type: string
                     description: イベントの開始日(yyyy-mm-dd HH:MM:SS)
-                  max_event_end_time: 
+                  max_event_end_time:
                     type: string
                     description: イベントの終了日(yyyy-mm-dd HH:MM:SS)
-                  place: 
+                  place:
                     type: string
                     description: 場所
-                  place_url: 
+                  place_url:
                     type: string
                     description: 場所URL
-                  member_num: 
+                  member_num:
                     type: string
                     description: メンバー数(1チームの人数）
-                  limit_time: 
+                  limit_time:
                     type: string
                     description: 制限時間(単位:時間)
-                  required_time: 
+                  required_time:
                     type: string
                     description: 所要時間(単位:分)
-                  scale: 
+                  scale:
                     type: string
                     description: |
                       1 ルーム型
                       2 ホール型
-                  multi_day: 
+                  multi_day:
                     type: string
                     description: 不明
-                  start_type: 
+                  start_type:
                     type: string
                     description: 一斉スタート/随時スタート
-                  for_english: 
+                  for_english:
                     type: string
                     description: 英語対応
-                  activity_type: 
+                  activity_type:
                     type: string
                     description: テーブル中心/身体を動かす
-                  area: 
+                  area:
                     type: string
                     description: 地方名
-                  pref: 
+                  pref:
                     type: string
                     description: 県名
                   in_or_out:
@@ -203,7 +208,7 @@ paths:
                   date:
                     type: object
                     properties:
-                      yyyy/mm/dd: 
+                      yyyy/mm/dd:
                         type: object
                         description: 日付(yyyy/mm/dd)
                         properties:
@@ -224,7 +229,7 @@ paths:
                                   description: イベントURL
                                 capacity:
                                   type: string
-                                  description: チーム人数                              
+                                  description: チーム人数
                                 start_time:
                                   type: string
                                   description: 開始時間
@@ -244,46 +249,46 @@ paths:
                                 image_url:
                                   type: string
                                   description: イベント画像URL
-                                public_start_time: 
+                                public_start_time:
                                   type: string
                                   description: イベント発表日？(yyyy-mm-dd HH:MM:SS)
-                                early_entry_start_time: 
+                                early_entry_start_time:
                                   type: string
                                   description: 事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
-                                early_entry_end_time: 
+                                early_entry_end_time:
                                   type: string
                                   description: 事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
-                                fc_entry_start_time: 
+                                fc_entry_start_time:
                                   type: string
                                   description: スクラップ団員事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
-                                fc_entry_end_time: 
+                                fc_entry_end_time:
                                   type: string
                                   description: スクラップ団員事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
-                                prime_entry_start_time: 
+                                prime_entry_start_time:
                                   type: string
                                   description: プライム事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
-                                prime_entry_end_time: 
+                                prime_entry_end_time:
                                   type: string
                                   description: プライム事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
-                                normal_entry_start_time: 
+                                normal_entry_start_time:
                                   type: string
                                   description: 通常事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
-                                normal_entry_end_time: 
+                                normal_entry_end_time:
                                   type: string
                                   description: 通常事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
-                                today_entry_start_time: 
+                                today_entry_start_time:
                                   type: string
                                   description: 当日券申し込み開始日(yyyy-mm-dd HH:MM:SS)
-                                today_entry_end_time: 
+                                today_entry_end_time:
                                   type: string
                                   description: 当日券申し込み終了日(yyyy-mm-dd HH:MM:SS)
-                                event_start_time: 
+                                event_start_time:
                                   type: string
                                   description: 指定日のイベント開始時間(yyyy-mm-dd HH:MM:SS)
-                                event_end_time: 
+                                event_end_time:
                                   type: string
                                   description: 指定日のイベント終了時間(yyyy-mm-dd HH:MM:SS)
-                                status: 
+                                status:
                                   type: string
                                   description: 不明
                                 event_entry_type:
@@ -292,7 +297,7 @@ paths:
                                 content_code:
                                   type: string
                                   description: コンテンツコード
-                                play_guides: 
+                                play_guides:
                                   type: object
                                   description: プレイガイド
                                   properties:
@@ -301,13 +306,13 @@ paths:
                                       description: チケットぴあURL
                                     eplus:
                                       type: string
-                                      description: eplusURL              
+                                      description: eplusURL
                                     l_tick:
                                       type: string
                                       description: ローソンチケットURL
                                     others_links:
                                       type: string
-                                      description: その他URL 
+                                      description: その他URL
                           event_count:
                             type: integer
                             description: dateで指定されている日のイベント開催数
