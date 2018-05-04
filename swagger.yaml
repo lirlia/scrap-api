@@ -1,0 +1,313 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: SCRAP API
+  description: SCRAPのチケット情報用のAPIです
+  version: "1.0.0"
+# the domain of the service
+host: www.0553.jp
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /scrap/api/v2
+produces:
+  - application/json
+paths:
+  /events:
+    get:
+      summary: イベント情報
+      description: |
+        eventsエンドポイントは、特定の場所や期間に開催されるSCRAPのリアル脱出ゲーム情報を返します。
+        ただし返却されるリアル脱出ゲームの情報はスクラップチケットで管理されるものが対象であり、
+        それ以外のチケットサイトで扱われるデータについては含まれません。
+        応答には、各イベントのタイトルや画像URL、チケットの残り枚数や開催店舗やその他の詳細が含まれ、
+        適切な表示順序でイベントが一覧表示されます。
+      parameters:
+        - name: display_type
+          in: query
+          description: 表示方法
+          required: false
+          type: string
+          format: "content_main"
+        - name: limit
+          in: query
+          description: 取得イベント数
+          required: false
+          type: number
+        - name: event_start_date
+          in: query
+          description: 開始日付
+          required: false
+          type: string
+          format: date
+        - name: event_end_date
+          in: query
+          description: 終了日付
+          required: false
+          type: string
+          format: date
+        - name: area
+          in: query
+          description: |
+            1 北海道
+            2 東北
+            3 北陸・甲信越
+            4 関東
+            5 東海
+            6 関西
+            7 中国
+            8 四国
+            9 九州・沖縄
+          required: false
+          type: number
+        - name: pref
+          in: query
+          description: |
+            01 北海道
+            02 青森
+            03 岩手
+            04 宮城
+            05 秋田
+            06 山形
+            07 福島
+            08 茨城
+            09 栃木
+            10 群馬
+            11 埼玉
+            12 千葉
+            13 東京
+            14 神奈川
+            15 新潟
+            16 富山
+            17 石川
+            18 福井
+            19 山梨
+            20 長野
+            21 岐阜
+            22 静岡
+            23 愛知
+            24 三重
+            25 滋賀
+            26 京都
+            27 大阪
+            28 兵庫
+            29 奈良
+            30 和歌山
+            31 鳥取
+            32 島根
+            33 岡山
+            34 広島
+            35 山口
+            36 徳島
+            37 香川
+            38 愛媛
+            39 高知
+            40 福岡
+            41 佐賀
+            42 長崎
+            43 熊本
+            44 大分
+            45 宮崎
+            46 鹿児島
+            47 沖縄
+          required: false
+          type: string
+      tags:
+        - events
+      responses:
+        200:
+          description: イベント情報配列
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: ステータス(OK）
+              content_count:
+                type: string
+                description: 検索にヒットしたイベント件数
+              contents:
+                type: object
+                description: イベント情報
+                properties:
+                  shop_id: 
+                    type: string
+                    description: 店ID
+                  shop_name: 
+                    type: string
+                    description: 店名
+                  shop_address_url: 
+                    type: string
+                    description: 店URL
+                  content_code: 
+                    type: string
+                    description: コンテンツコード(英字)
+                  content_name: 
+                    type: string
+                    description: コンテンツ名(unicode)
+                  origin_contents_url: 
+                    type: string
+                    description: コンテンツURL(公式サイト）
+                  content_url: 
+                    type: string
+                    description: コンテンツURL(スクラップチケットサイト）
+                  min_event_start_time: 
+                    type: string
+                    description: イベントの開始日(yyyy-mm-dd HH:MM:SS)
+                  max_event_end_time: 
+                    type: string
+                    description: イベントの終了日(yyyy-mm-dd HH:MM:SS)
+                  place: 
+                    type: string
+                    description: 場所
+                  place_url: 
+                    type: string
+                    description: 場所URL
+                  member_num: 
+                    type: string
+                    description: メンバー数(1チームの人数）
+                  limit_time: 
+                    type: string
+                    description: 制限時間(単位:時間)
+                  required_time: 
+                    type: string
+                    description: 所要時間(単位:分)
+                  scale: 
+                    type: string
+                    description: |
+                      1 ルーム型
+                      2 ホール型
+                  multi_day: 
+                    type: string
+                    description: 不明
+                  start_type: 
+                    type: string
+                    description: 一斉スタート/随時スタート
+                  for_english: 
+                    type: string
+                    description: 英語対応
+                  activity_type: 
+                    type: string
+                    description: テーブル中心/身体を動かす
+                  area: 
+                    type: string
+                    description: 地方名
+                  pref: 
+                    type: string
+                    description: 県名
+                  in_or_out:
+                    type: string
+                    description: 不明 ※県名が入る
+                  date:
+                    type: object
+                    properties:
+                      yyyy/mm/dd: 
+                        type: object
+                        description: 日付(yyyy/mm/dd)
+                        properties:
+                          events:
+                            type: array
+                            items:
+                              type: object
+                              description: イベント情報(個別回)
+                              properties:
+                                id:
+                                  type: string
+                                  description: イベント個別ID
+                                name:
+                                  type: string
+                                  description: イベント名
+                                event_url:
+                                  type: string
+                                  description: イベントURL
+                                capacity:
+                                  type: string
+                                  description: チーム人数                              
+                                start_time:
+                                  type: string
+                                  description: 開始時間
+                                end_time:
+                                  type: string
+                                  description: 終了時間
+                                ticket_stock:
+                                  type: string
+                                  description: チケット残枚数
+                                ticket_stock_status:
+                                  type: string
+                                  description: |
+                                    チケットステータス
+                                    0 ◯
+                                    1 △
+                                    2 ×
+                                image_url:
+                                  type: string
+                                  description: イベント画像URL
+                                public_start_time: 
+                                  type: string
+                                  description: イベント発表日？(yyyy-mm-dd HH:MM:SS)
+                                early_entry_start_time: 
+                                  type: string
+                                  description: 事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
+                                early_entry_end_time: 
+                                  type: string
+                                  description: 事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
+                                fc_entry_start_time: 
+                                  type: string
+                                  description: スクラップ団員事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
+                                fc_entry_end_time: 
+                                  type: string
+                                  description: スクラップ団員事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
+                                prime_entry_start_time: 
+                                  type: string
+                                  description: プライム事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
+                                prime_entry_end_time: 
+                                  type: string
+                                  description: プライム事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
+                                normal_entry_start_time: 
+                                  type: string
+                                  description: 通常事前申し込み開始日(yyyy-mm-dd HH:MM:SS)
+                                normal_entry_end_time: 
+                                  type: string
+                                  description: 通常事前申し込み終了日(yyyy-mm-dd HH:MM:SS)
+                                today_entry_start_time: 
+                                  type: string
+                                  description: 当日券申し込み開始日(yyyy-mm-dd HH:MM:SS)
+                                today_entry_end_time: 
+                                  type: string
+                                  description: 当日券申し込み終了日(yyyy-mm-dd HH:MM:SS)
+                                event_start_time: 
+                                  type: string
+                                  description: 指定日のイベント開始時間(yyyy-mm-dd HH:MM:SS)
+                                event_end_time: 
+                                  type: string
+                                  description: 指定日のイベント終了時間(yyyy-mm-dd HH:MM:SS)
+                                status: 
+                                  type: string
+                                  description: 不明
+                                event_entry_type:
+                                  type: number
+                                  description: 不明
+                                content_code:
+                                  type: string
+                                  description: コンテンツコード
+                                play_guides: 
+                                  type: object
+                                  description: プレイガイド
+                                  properties:
+                                    t_pia:
+                                      type: string
+                                      description: チケットぴあURL
+                                    eplus:
+                                      type: string
+                                      description: eplusURL              
+                                    l_tick:
+                                      type: string
+                                      description: ローソンチケットURL
+                                    others_links:
+                                      type: string
+                                      description: その他URL 
+                          event_count:
+                            type: integer
+                            description: dateで指定されている日のイベント開催数
